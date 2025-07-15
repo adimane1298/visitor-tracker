@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Visitor Form - Shri Swami Samarth Gurupeeth</title>
+</head>
+<body>
+  <h2>🙏 Akhil Bhartiya Shri Swami Samarth Gurupeeth Dattadham, Shri Kshetra Nrusinhwadi 🙏</h2>
+  <form id="visitForm">
+    <label>Full Name (पूर्ण नाव):<br><input type="text" name="name" required></label><br><br>
+    <label>Address (पत्ता):<br><input type="text" name="address" required></label><br><br>
+    <label>Mobile Number (फोन नंबर - WhatsApp):<br><input type="tel" name="phone" required></label><br><br>
+    <label>जनकल्याण फॉर्म भरलेला आहे का?:<br>
+      <select name="jankalyan">
+        <option value="Yes">होय (Yes)</option>
+        <option value="No">नाही (No)</option>
+      </select>
+    </label><br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="msg"></p>
+
+  <script>
+    const form = document.getElementById('visitForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const params = new URLSearchParams();
+      for (const pair of formData.entries()) {
+        params.append(pair[0], pair[1]);
+      }
+      const res = await fetch('https://script.google.com/macros/s/AKfycbyJSIl6VgBpGUS5Y7nrnu-QTuQ6B_5tu1ILccEhLgB5id8FiWTpS9phkevQq310ee1F/exec', {
+        method: 'POST',
+        body: params
+      });
+      const data = await res.json();
+      document.getElementById('msg').innerText = data.message || 'Submitted!';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
