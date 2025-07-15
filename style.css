@@ -3,7 +3,7 @@ body, html {
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
   height: 100%;
-  background-image: url('background.jpg'); /* Replace with your own image */
+  background-image: url('background.png'); /* Replace with your own image */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
