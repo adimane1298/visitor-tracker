@@ -2,7 +2,7 @@ async function checkPhone() {
   const phone = document.getElementById("phone").value;
   if (!phone) return;
 
-  const res = await fetch(`https://script.google.com/macros/s/AKfycbxNqtCnhAuhFh73AAfYXTkBgUdm_a4VPFU54CSJhtjUwTwGkxpXaZuKls5RlDh4f12I/execs?phone=${phone}`);
+  const res = await fetch(`https://script.google.com/macros/s/AKfycbyBYbL4V4vXHeYuvgV2P7d1Q0lqIqAjGNSQ7QgPUSH9tfDRQndP-GRWc9wcKDk9nyap/exec?phone=${phone}`);
   const data = await res.json();
 
   const regDiv = document.getElementById("regFields");
@@ -25,7 +25,7 @@ async function submitForm(e) {
   const form = document.getElementById("visitForm");
   const formData = new FormData(form);
   const params = new URLSearchParams(formData);
-  const res = await fetch('https://script.google.com/macros/s/AKfycbxNqtCnhAuhFh73AAfYXTkBgUdm_a4VPFU54CSJhtjUwTwGkxpXaZuKls5RlDh4f12I/exec', {
+  const res = await fetch('https://script.google.com/macros/s/AKfycbyBYbL4V4vXHeYuvgV2P7d1Q0lqIqAjGNSQ7QgPUSH9tfDRQndP-GRWc9wcKDk9nyap/exec', {
     method: 'POST',
     body: params
   });
