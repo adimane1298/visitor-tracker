@@ -4,40 +4,66 @@
 <head>
   <meta charset="UTF-8">
   <title>Visitor Form - Shri Swami Samarth Gurupeeth</title>
-</head>
-<body>
-  <h2>🙏 Akhil Bhartiya Shri Swami Samarth Gurupeeth Dattadham, Shri Kshetra Nrusinhwadi 🙏</h2>
-  <form id="visitForm">
-    <label>Full Name (पूर्ण नाव):<br><input type="text" name="name" required></label><br><br>
-    <label>Address (पत्ता):<br><input type="text" name="address" required></label><br><br>
-    <label>Mobile Number (फोन नंबर - WhatsApp):<br><input type="tel" name="phone" required></label><br><br>
-    <label>जनकल्याण फॉर्म भरलेला आहे का?:<br>
-      <select name="jankalyan">
-        <option value="Yes">होय (Yes)</option>
-        <option value="No">नाही (No)</option>
-      </select>
-    </label><br><br>
-    <button type="submit">Submit</button>
-  </form>
-  <p id="msg"></p>
-
   <script>
-    const form = document.getElementById('visitForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const params = new URLSearchParams();
-      for (const pair of formData.entries()) {
-        params.append(pair[0], pair[1]);
+    async function checkPhone() {
+      const phone = document.getElementById("phone").value;
+      if (!phone) return;
+
+      const res = await fetch(`https://script.google.com/macros/s/AKfycbxNqtCnhAuhFh73AAfYXTkBgUdm_a4VPFU54CSJhtjUwTwGkxpXaZuKls5RlDh4f12I/exec?phone=${phone}`);
+      const data = await res.json();
+
+      const regDiv = document.getElementById("regFields");
+      const msg = document.getElementById("msg");
+      const submitBtn = document.getElementById("submitBtn");
+
+      if (data.exists) {
+        msg.innerText = "🙏 Thank you for your visit! Your darshan has been recorded.";
+        regDiv.style.display = "none";
+        submitBtn.style.display = "none";
+      } else {
+        regDiv.style.display = "block";
+        submitBtn.style.display = "inline";
+        msg.innerText = "";
       }
-      const res = await fetch('https://script.google.com/macros/s/AKfycbyJSIl6VgBpGUS5Y7nrnu-QTuQ6B_5tu1ILccEhLgB5id8FiWTpS9phkevQq310ee1F/exec', {
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const form = document.getElementById("visitForm");
+      const formData = new FormData(form);
+      const params = new URLSearchParams(formData);
+      const res = await fetch('https://script.google.com/macros/s/AKfycbxNqtCnhAuhFh73AAfYXTkBgUdm_a4VPFU54CSJhtjUwTwGkxpXaZuKls5RlDh4f12I/exec', {
         method: 'POST',
         body: params
       });
       const data = await res.json();
-      document.getElementById('msg').innerText = data.message || 'Submitted!';
+      document.getElementById("msg").innerText = data.message || 'Submitted!';
       form.reset();
-    });
+    }
   </script>
+</head>
+<body>
+  <h2>🙏 Akhil Bhartiya Shri Swami Samarth Gurupeeth Dattadham, Shri Kshetra Nrusinhwadi 🙏</h2>
+
+  <form id="visitForm" onsubmit="submitForm(event)">
+    <label>Mobile Number (फोन नंबर - WhatsApp):<br>
+      <input type="tel" id="phone" name="phone" required onblur="checkPhone()">
+    </label><br><br>
+
+    <div id="regFields" style="display:none;">
+      <label>Full Name (पूर्ण नाव):<br><input type="text" name="name" required></label><br><br>
+      <label>Address (पत्ता):<br><input type="text" name="address" required></label><br><br>
+      <label>जनकल्याण फॉर्म भरलेला आहे का?:<br>
+        <select name="jankalyan">
+          <option value="Yes">होय (Yes)</option>
+          <option value="No">नाही (No)</option>
+        </select>
+      </label><br><br>
+    </div>
+
+    <button id="submitBtn" type="submit" style="display:none;">Submit</button>
+  </form>
+
+  <p id="msg"></p>
 </body>
 </html>
