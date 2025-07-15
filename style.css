@@ -1,0 +1,90 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  background-image: url('background.jpg'); /* Replace with your own image */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.bg-overlay {
+  background-color: rgba(255, 255, 255, 0.92);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 95%;
+  max-width: 420px;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 90px;
+  height: auto;
+  border-radius: 50%;
+  border: 2px solid #f59e0b;
+}
+
+.title {
+  color: #b45309;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  background: #f97316;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background: #ea580c;
+}
+
+.message {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: green;
+}
+
+#regFields {
+  display: none;
+}
